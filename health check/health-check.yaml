@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: health
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-deployment
+  template:
+    metadata:
+      labels:
+        app: my-deployment
+    spec:
+      containers:
+      - name: health-con
+        image: zxcvbnius/docker-demo
+        ports:
+        - name: health-port
+          containerPort: 3000
+        livenessProbe:
+          httpGet:
+            path: /
+            port: health-port
+          initialDelaySeconds: 15
+          periodSeconds: 15
+          timeoutSeconds: 30
+          successThreshold: 1
+          failureThreshold: 3
