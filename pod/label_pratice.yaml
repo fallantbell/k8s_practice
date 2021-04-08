@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+  labels:
+    app: pratice
+  annotations:
+    version: latest
+    release_date: 2021/4/8
+spec:
+  containers:
+  - name: label-prac
+    image: zxcvbnius/docker-demo
+    ports:
+    - containerPort: 3000
+  
+  nodeSelector:
+    hardware: high-memory
